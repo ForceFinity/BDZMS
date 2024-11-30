@@ -2,11 +2,10 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from ms_core import setup_app
+from ms_core import include_routers, conf_base_middlewares
 
 from app import settings
-from app.settings import db_url
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -20,18 +19,6 @@ application = FastAPI(
     lifespan=lifespan
 )
 
-setup_app(
-    application,
-    db_url,
-    Path("app") / "routers",
-    ["app.models"]
-)
 
-# noinspection PyTypeChecker
-application.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+include_routers(application, Path("app") / "routers")
+conf_base_middlewares(application)
