@@ -38,3 +38,5 @@ The microservice handles API requests through FastAPI endpoints, processes them,
 
 ## 🧪 Testing 
 - The microservice includes unit tests to ensure data processing and API communication work correctly. You can run tests using `pytest`. 
+
+You can also explore the frontend of this project here: [WiseFrontendLegacy](https://github.com/ForceFinity/WiseFrontendLegacy).
